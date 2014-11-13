@@ -38,12 +38,16 @@ function create() {
     game.physics.p2.restitution = 0.9;
 
     //
-    circle = new PhyObject(game,winWidth>>1,winHeight>>1,{type:'cir',r:10},0);
+    circle = new MyCircle(winWidth>>1,winHeight>>1,10);
+    /*circle = new PhyObject(game,winWidth>>1,winHeight>>1,{type:'cir',r:10});
+    boxes = new PhyObject(game,winWidth>>1,winHeight>>1,{type:'ret',w:20,h:20})*/
 }
 
 
 function update() {
-    circle.render()
+
+    circle.update();
+    //boxes.update();
 }
 
 function render() {}
