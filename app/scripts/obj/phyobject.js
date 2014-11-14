@@ -9,18 +9,15 @@ var MyPhyObject = Class({
         this.body = game.add.sprite(this.x, this.y);
         game.physics.p2.enable(this.body);
         this.body = this.body.body;
+        this.display();
     },
-    new:function(){},
-    update:function(callback){
+    display:function(){},
+    update:function(){
         this.feather.x = this.body.x;
         this.feather.y = this.body.y;
-
-        if(callback){
-            if(isFunction(callback)){
-                callback();
-            }else{
-                console.warn('PhyObject update with a wrond callback!');
-            }
+        if(this.motion){
+            this.motion();
         }
     }
+
 });

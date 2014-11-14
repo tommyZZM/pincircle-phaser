@@ -49,7 +49,7 @@ function Class(baseClass, prop) {
 // 这是JavaScript框架开发中常用的技巧。
                 F.prototype[property] = (function (property, fn) {
                     return function () {
-                        this.parent = baseClass.prototype[property];
+                        this.super = baseClass.prototype[property];
                         return fn.apply(this, arguments);
                     };
                 })(property, prop[property]);
