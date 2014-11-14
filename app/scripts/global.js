@@ -7,6 +7,16 @@ function isFunction( fn ) {
     /function/i.test( fn + "" );
 }
 
+function numSplit(num){
+    num = num+'';
+    var result = num.split(".");
+    result = {
+        integer:result[0]*1,
+        decimal:('0.' + result[1])*1
+    };
+    return result;
+}
+
 var initializing = false;
 function Class(baseClass, prop) {
 // 只接受一个参数的情况 - Class(prop)

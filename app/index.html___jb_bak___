@@ -27,7 +27,6 @@
     <script src="scripts/global.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/obj/gameobjects.js"></script>
-    <script src="scripts/obj/box.js"></script>
     <!-- endbuild -->
   </body>
 </html>
