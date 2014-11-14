@@ -2,19 +2,40 @@ console.log('\'Allo \'Allo!');
 
 var winHeight;
 var winWidth;
-if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
-{
-    winHeight = document.documentElement.clientHeight;
-    winWidth = document.documentElement.clientWidth;
-}else{
-    winHeight = window.innerHeight;
-    winWidth = window.innerWidth;
-}
 
-var game = new Phaser.Game(winWidth, winHeight, Phaser.CANVAS, '',//Phaser.AUTO
-    { preload: preload, create: create, update: update ,render: render },false,true);
+var game;
+var text;
+var button;
+
+//bootstrap
+$(function(){
+    if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+    {
+        winHeight = document.documentElement.clientHeight;
+        winWidth = document.documentElement.clientWidth;
+    }else{
+        winHeight = window.innerHeight;
+        winWidth = window.innerWidth;
+    }
+
+    text = $('#text');
+    button = $('#button');
+
+    text.css('margin-left',-text.width()/2).show();
+
+
+    $('#game').width(winWidth).height(winHeight);
+
+    button.click(function(){
+        game = new Phaser.Game(winWidth, winHeight, Phaser.CANVAS, 'game',//Phaser.AUTO
+            { preload: preload, create: create, update: update ,render: render },false,true);
+        $(this).hide();
+        text.hide();
+    });
+});
 
 var status = 1;
+var score = 0;
 
 var curr_rows = 0;
 var box_total = 0;
@@ -27,10 +48,7 @@ var boxpos = {};
 var circle;
 var tab;
 
-var ui;
-
 var mouse;
-var is_draging = false;
 
 function preload() {}
 
@@ -68,6 +86,8 @@ function create() {
         boxes[i] = [];
         for(var j=0;j<box_total;j++){
             boxes[i][j] = new MyBox(boxpos.x,boxpos.y,box_width,'haha');
+            boxes[i][j].vessel.i = i;
+            boxes[i][j].vessel.j = j;
             boxpos.x += box_width+box_space;
         }
         boxpos.resetx();
@@ -79,10 +99,23 @@ function create() {
     setTimeout(timecount,5000);
 
     game.input.addMoveCallback(onDrag, this);
+    circle.body.onBeginContact.add(onHit, this);
 }
 
 function onDrag(pointer){
     mouse = pointer;
+}
+
+function onHit(body, shapeA, shapeB, equation){
+    if(body){
+        if(body.parent instanceof MyBox){
+            body.parent.destroy();
+            boxes[body.parent.vessel.i].splice(body.parent.vessel.j,1);
+            console.log(body.parent.vessel.i,' ',body.parent.vessel.j,' ',boxes[body.parent.vessel.i].length);
+            score++;
+        }
+    }
+    //console.log('onHit '+body);
 }
 
 function update() {
@@ -115,7 +148,7 @@ function update() {
             if(box.is_moving){
                 if(box.body.y >= (box.last_y+box_width+box_space)){
                     box.body.y = box.last_y+box_width+box_space;
-                    console.log(box.body.y,' ',box.last_y);
+                    //console.log(box.body.y,' ',box.last_y);
                     box.body.velocity.y = 0;
                     box.is_moving = false;
                 }
@@ -134,12 +167,14 @@ function timecount()
 {
     if(curr_rows<3){
         var newrow = [];
+        boxes.push(newrow);
         for(var a=0;a<box_total;a++){
             newrow[a] = new MyBox(boxpos.x,boxpos.y,box_width,'haha');
+            newrow[a].vessel.i = boxes.length -1;
+            newrow[a].vessel.j = a;
             boxpos.x += box_width+box_space;
         }
         boxpos.resetx();
-        boxes.push(newrow);
         curr_rows++
 
         for(var i=0;i<boxes.length;i++){

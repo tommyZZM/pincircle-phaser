@@ -6,9 +6,10 @@ var MyPhyObject = Class({
         this.x = x;
         this.y = y;
         this.feather = game.add.graphics(this.x, this.y);
-        this.body = game.add.sprite(this.x, this.y);
-        game.physics.p2.enable(this.body);
-        this.body = this.body.body;
+        this.sprite = game.add.sprite(this.x, this.y);
+        game.physics.p2.enable(this.sprite);
+        this.body = this.sprite.body;
+        this.body.parent = this;
         this.display();
     },
     display:function(){},
@@ -74,6 +75,7 @@ var MyBox=Class(MyPhyObject,{
 
         this.is_moving = false;
         this.last_y = y;
+        this.vessel = {i:0,j:0};
     },
     display:function(){
         switch (this.type){
@@ -98,6 +100,11 @@ var MyBox=Class(MyPhyObject,{
                 break;
             }
         }
+    },
+    destroy:function(){
+        this.sprite.kill();
+        this.sprite.parent.removeChild(this.sprite);
+        this.feather.parent.removeChild(this.feather);
     }
 });
 

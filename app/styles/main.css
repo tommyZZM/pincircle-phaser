@@ -1,89 +1,40 @@
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+body{
+    display: block;
+    margin: 0;
+    font-family:"Comic Sans MS","幼圆","微软雅黑",sans-serif;
+    background: #2c3e50;
 }
 
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+h1{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-left: -3.6em;
+    color: #fff;
+    font-weight: normal;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+.button{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    margin-left: -3.6em;
+    margin-top: -2.0em;
+    width: 6em;
+    height: 1.6em;
+    border-radius: 0.375em;
+    background: #f39c12;
+    text-align: center;
+    vertical-align: middle;
+    /*text-shadow: 0.0625em 0.0625em 0.0625em #d35400;*/
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    padding: 0.6em;
+    box-shadow: 0 0.125em #d35400;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+.button:hover{
+    margin-top: -1.9375em;
+    box-shadow: 0 0.0625em #d35400;;
 }
