@@ -19,8 +19,25 @@ var MyPhyObject = Class({
         if(this.motion){
             this.motion();
         }
+    },
+    destroy:function(){
+        this.sprite.kill();
+        try{
+            this.sprite.parent.removeChild(this.sprite);
+            this.feather.parent.removeChild(this.feather);
+        }catch(error){
+        }
+    },
+    reset:function(x,y,velocity){
+        console.log(this.body.y);
+        this.body.x = x;
+        this.body.y = y;
+        if(!velocity){
+            velocity = [0,0];
+        }
+        /*this.body.velocity.x = velocity[0];
+        this.body.velocity.y = velocity[1];*/
     }
-
 });
 
 var MyCircle=Class(MyPhyObject,{
@@ -30,7 +47,8 @@ var MyCircle=Class(MyPhyObject,{
         this.super(x,y);
 
         //debug
-        this.body.velocity.y = this.body.velocity.x = 1;
+        this.body.velocity.y = -1;
+        this.body.velocity.x = 0;
 
     },
     display:function(){
@@ -100,11 +118,6 @@ var MyBox=Class(MyPhyObject,{
                 break;
             }
         }
-    },
-    destroy:function(){
-        this.sprite.kill();
-        this.sprite.parent.removeChild(this.sprite);
-        this.feather.parent.removeChild(this.feather);
     }
 });
 
