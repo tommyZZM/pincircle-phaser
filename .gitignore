@@ -1,8 +1,3 @@
-node_modules
-dist
-.tmp
-bower_components
-.idea
-test
-
-npm-debug.log
+# Created by .ignore support plugin (hsz.mobi)
+node_modules/
+bower_components/

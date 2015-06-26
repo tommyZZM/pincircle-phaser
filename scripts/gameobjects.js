@@ -48,7 +48,7 @@ var MyCircle=Class(MyPhyObject,{
 
         //debug
         this.body.velocity.y = -1;
-        this.body.velocity.x = 0;
+        this.body.velocity.x = Math.random()*0.3-0.15;
 
     },
     display:function(){
